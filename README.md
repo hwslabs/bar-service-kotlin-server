@@ -7,7 +7,7 @@
 This directory contains the server impl in Kotlin for a simple gRPC bar service. 
 You can find detailed instructions for building and running example from below
 
-- **Bar Service** using gRPC and Kotlin. For details, see the [project on github](https://gitlab.com/hwslabs/bar-service-kotlin-server).
+- **Bar Service** using gRPC and Kotlin. For details, see the [project on github](https://github.com/hwslabs/bar-service-kotlin-server).
 
 ## File organization
 
@@ -27,7 +27,7 @@ The starter sources are organized into the following top-level folders:
 - <details>
   <summary>Clone the project</summary>
 
-  Clone the project recursively cloning submodule
+  Clone the project recursively cloning all submodules
 
   ```sh
   git clone https://github.com/hwslabs/grpc-kotlin-starter.git --recurse-submodules
@@ -84,7 +84,7 @@ The starter sources are organized into the following top-level folders:
 - <details>
   <summary>Clone the project</summary>
 
-  Clone the project recursively cloning submodule
+  Clone the project recursively cloning all submodules
 
   ```sh
   git clone https://github.com/hwslabs/grpc-kotlin-starter.git --recurse-submodules
