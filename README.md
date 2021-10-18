@@ -30,7 +30,7 @@ The starter sources are organized into the following top-level folders:
   Clone the project recursively cloning all submodules
 
   ```sh
-  git clone https://github.com/hwslabs/grpc-kotlin-starter.git --recurse-submodules
+  git clone git@github.com:hwslabs/bar-service-kotlin-server.git --recurse-submodules
   ```
   
   Navigate into the project:
@@ -87,7 +87,7 @@ The starter sources are organized into the following top-level folders:
   Clone the project recursively cloning all submodules
 
   ```sh
-  git clone https://github.com/hwslabs/grpc-kotlin-starter.git --recurse-submodules
+  git clone git@github.com:hwslabs/bar-service-kotlin-server.git --recurse-submodules
   ```
 
   Navigate into the project:
