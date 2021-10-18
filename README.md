@@ -101,7 +101,7 @@ The starter sources are organized into the following top-level folders:
   Start the server:
 
   ```sh
-  ./gradlew bar-service-server:BarServer
+  ./gradlew bar-service-server:start
   ```
 
   This will start the server and open up the 50051 port for connections
