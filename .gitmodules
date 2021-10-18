@@ -1,0 +1,6 @@
+[submodule "bar-service-models"]
+	path = bar-service-models
+	url = git@github.com:hwslabs/bar-service-models.git
+[submodule "bar-service-kotlin-stubs"]
+	path = bar-service-kotlin-stubs
+	url = git@github.com:hwslabs/bar-service-kotlin-stubs.git
