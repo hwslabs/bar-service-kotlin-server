@@ -11,7 +11,7 @@ plugins {
 }
 
 dependencies {
-    protobuf(project(":bar-service-models"))
+    protobuf(project(":starter-service-models"))
 
     api(kotlin("stdlib"))
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
