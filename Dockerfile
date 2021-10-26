@@ -9,7 +9,7 @@ RUN ./gradlew installDist
 
 FROM openjdk:8 AS runner
 ENV APP_HOME=/usr/app/
-ENV SERVER_PATH=bar-service-server
+ENV SERVER_PATH=starter-service-server
 ENV BUILD_PATH=build
 ENV EXECUTABLE_NAME=starter-server
 WORKDIR $APP_HOME
