@@ -11,7 +11,7 @@ FROM openjdk:8 AS runner
 ENV APP_HOME=/usr/app/
 ENV SERVER_PATH=bar-service-server
 ENV BUILD_PATH=build
-ENV EXECUTABLE_NAME=bar-server
+ENV EXECUTABLE_NAME=starter-server
 WORKDIR $APP_HOME
 COPY --from=builder $APP_HOME/$SERVER_PATH/$BUILD_PATH/ .
 EXPOSE 50051

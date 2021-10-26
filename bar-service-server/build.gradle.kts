@@ -58,16 +58,16 @@ protobuf {
 tasks.register<JavaExec>("start") {
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("com.hypto.hws.services.starter.BarServerKt")
+    mainClass.set("com.hypto.hws.services.StarterServerKt")
 }
 
-val barServerStartScripts = tasks.register<CreateStartScripts>("barServerStartScripts") {
-    mainClass.set("com.hypto.hws.services.starter.BarServerKt")
-    applicationName = "bar-server"
+val starterServerStartScripts = tasks.register<CreateStartScripts>("starterServerStartScripts") {
+    mainClass.set("com.hypto.hws.services.StarterServerKt")
+    applicationName = "starter-server"
     outputDir = tasks.named<CreateStartScripts>("startScripts").get().outputDir
     classpath = tasks.named<CreateStartScripts>("startScripts").get().classpath
 }
 
 tasks.named("startScripts") {
-    dependsOn(barServerStartScripts)
+    dependsOn(starterServerStartScripts)
 }

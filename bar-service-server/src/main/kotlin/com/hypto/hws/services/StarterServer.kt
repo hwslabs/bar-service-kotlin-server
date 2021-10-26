@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.hypto.hws.services.starter
+package com.hypto.hws.services
 
 import io.grpc.Server
 import io.grpc.ServerBuilder
 
-class BarServer(private val port: Int) {
+class StarterServer(private val port: Int) {
     private val server: Server = ServerBuilder
             .forPort(port)
-            .addService(HyptoBarService())
+            .addService(StarterService())
             .build()
 
     fun start() {
@@ -31,7 +31,7 @@ class BarServer(private val port: Int) {
         Runtime.getRuntime().addShutdownHook(
                 Thread {
                     println("*** shutting down gRPC server since JVM is shutting down")
-                    this@BarServer.stop()
+                    this@StarterServer.stop()
                     println("*** server shut down")
                 }
         )
@@ -45,7 +45,7 @@ class BarServer(private val port: Int) {
         server.awaitTermination()
     }
 
-    private class HyptoBarService : BarGrpcKt.BarCoroutineImplBase() {
+    private class StarterService : StarterGrpcKt.StarterCoroutineImplBase() {
         override suspend fun printText(request: InputRequest): OutputResponse {
             println("Input Requested: $request")
             return OutputResponse.newBuilder()
@@ -57,7 +57,7 @@ class BarServer(private val port: Int) {
 
 fun main() {
     val port = System.getenv("PORT")?.toInt() ?: 50051
-    val server = BarServer(port)
+    val server = StarterServer(port)
     server.start()
     server.blockUntilShutdown()
 }
