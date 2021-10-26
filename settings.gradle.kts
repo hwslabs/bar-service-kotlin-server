@@ -1,4 +1,4 @@
-rootProject.name = "bar-service-kotlin-server"
+rootProject.name = "starter-service-kotlin-server"
 
 include("starter-service-models", "starter-service-server")
 
