@@ -1,6 +1,12 @@
 version: "3"
 services:
-  app:
-    build: .
+  starter-service:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    environment:
+      - SERVER_PATH=starter-service-server
+      - EXECUTABLE_NAME=starter-server
+    command: [./docker/run.sh, clean_build=false]
     ports:
       - "50051:50051"
