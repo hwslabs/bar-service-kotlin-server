@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.hypto.hws.services
+package {TEMPLATE_PKG_NAME}
 
 import io.grpc.Server
 import io.grpc.ServerBuilder
 
-class StarterServer(private val port: Int) {
+class {TEMPLATE_SERVICE_NAME}Server(private val port: Int) {
     private val server: Server = ServerBuilder
             .forPort(port)
-            .addService(StarterService())
+            .addService({TEMPLATE_SERVICE_NAME}Service())
             .build()
 
     fun start() {
@@ -31,7 +31,7 @@ class StarterServer(private val port: Int) {
         Runtime.getRuntime().addShutdownHook(
                 Thread {
                     println("*** shutting down gRPC server since JVM is shutting down")
-                    this@StarterServer.stop()
+                    this@{TEMPLATE_SERVICE_NAME}Server.stop()
                     println("*** server shut down")
                 }
         )
@@ -45,7 +45,7 @@ class StarterServer(private val port: Int) {
         server.awaitTermination()
     }
 
-    private class StarterService : StarterGrpcKt.StarterCoroutineImplBase() {
+    private class {TEMPLATE_SERVICE_NAME}Service : {TEMPLATE_SERVICE_NAME}GrpcKt.{TEMPLATE_SERVICE_NAME}CoroutineImplBase() {
         override suspend fun printText(request: InputRequest): OutputResponse {
             println("Input Requested: $request")
             return OutputResponse.newBuilder()
@@ -57,7 +57,7 @@ class StarterServer(private val port: Int) {
 
 fun main() {
     val port = System.getenv("PORT")?.toInt() ?: 50051
-    val server = StarterServer(port)
+    val server = {TEMPLATE_SERVICE_NAME}Server(port)
     server.start()
     server.blockUntilShutdown()
 }
