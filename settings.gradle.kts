@@ -1,6 +1,6 @@
-rootProject.name = "starter-service-server"
+rootProject.name = "{TEMPLATE_SERVICE_HYPHEN_NAME}-service-server"
 
-include("starter-service-models", "starter-service-server")
+include("{TEMPLATE_SERVICE_HYPHEN_NAME}-service-models", "{TEMPLATE_SERVICE_HYPHEN_NAME}-service-server")
 
 pluginManagement {
     repositories {

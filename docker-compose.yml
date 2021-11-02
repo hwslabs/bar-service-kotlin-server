@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     environment:
-      - SERVER_PATH=starter-service-server
-      - EXECUTABLE_NAME=starter-server
+      - SERVER_PATH={TEMPLATE_SERVICE_HYPHEN_NAME}-service-server
+      - EXECUTABLE_NAME={TEMPLATE_SERVICE_HYPHEN_NAME}-server
     command: [./docker/run.sh, clean_build=false]
     ports:
       - "50051:50051"
