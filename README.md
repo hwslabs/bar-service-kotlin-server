@@ -4,7 +4,7 @@
 
 ## Overview
 
-This directory contains the server impl in Kotlin for a simple gRPC bar service. 
+This directory contains the server impl in Kotlin for a simple gRPC starter service. 
 You can find detailed instructions for building and running example from below
 
 - **Bar Service Server** using gRPC and Kotlin. For details, see the [project on github](https://github.com/hwslabs/bar-service-kotlin-server).
@@ -13,9 +13,8 @@ You can find detailed instructions for building and running example from below
 
 The starter sources are organized into the following top-level folders:
 
-- [bar-service-models](bar-service-models): `.proto` files for generating the stubs
-- [bar-service-kotlin-stubs](bar-service-kotlin-stubs): regular Java & Kotlin stub artifacts from [protos][]
-- [bar-service-server](bar-service-server): Kotlin servers based on regular [stub][] artifacts
+- [starter-service-models](starter-service-models): `.proto` files for generating the stubs
+- [starter-service-server](starter-service-server): Kotlin servers based on regular [stub][] artifacts
 
 ## Set up and run the server inside a docker on macOS
 - <details>
@@ -101,7 +100,7 @@ The starter sources are organized into the following top-level folders:
   Start the server:
 
   ```sh
-  ./gradlew bar-service-server:start
+  ./gradlew starter-service-server:start
   ```
 
   This will start the server and open up the 50051 port for connections

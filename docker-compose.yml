@@ -1,7 +1,13 @@
 version: "3"
 services:
-  bar-service:
-    image: ${DOCKER_REGISTRY}/bar-service
-    build: .
+  {TEMPLATE_SERVICE_HYPHEN_NAME}-service:
+    image: ${DOCKER_REGISTRY}/{TEMPLATE_SERVICE_HYPHEN_NAME}-service
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    environment:
+      - SERVER_PATH={TEMPLATE_SERVICE_HYPHEN_NAME}-service-server
+      - EXECUTABLE_NAME={TEMPLATE_SERVICE_HYPHEN_NAME}-server
+    command: [./docker/run.sh, clean_build=false]
     ports:
       - "50051:50051"

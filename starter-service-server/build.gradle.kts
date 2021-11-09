@@ -11,7 +11,7 @@ plugins {
 }
 
 dependencies {
-    protobuf(project(":bar-service-models"))
+    protobuf(project(":{TEMPLATE_SERVICE_HYPHEN_NAME}-service-models"))
 
     api(kotlin("stdlib"))
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
@@ -58,16 +58,16 @@ protobuf {
 tasks.register<JavaExec>("start") {
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("com.hypto.hws.services.starter.BarServerKt")
+    mainClass.set("{TEMPLATE_PKG_NAME}.{TEMPLATE_SERVICE_NAME}ServerKt")
 }
 
-val barServerStartScripts = tasks.register<CreateStartScripts>("barServerStartScripts") {
-    mainClass.set("com.hypto.hws.services.starter.BarServerKt")
-    applicationName = "bar-server"
+val {TEMPLATE_SERVICE_NAME}ServerStartScripts = tasks.register<CreateStartScripts>("{TEMPLATE_SERVICE_NAME}ServerStartScripts") {
+    mainClass.set("{TEMPLATE_PKG_NAME}.{TEMPLATE_SERVICE_NAME}ServerKt")
+    applicationName = "{TEMPLATE_SERVICE_HYPHEN_NAME}-server"
     outputDir = tasks.named<CreateStartScripts>("startScripts").get().outputDir
     classpath = tasks.named<CreateStartScripts>("startScripts").get().classpath
 }
 
 tasks.named("startScripts") {
-    dependsOn(barServerStartScripts)
+    dependsOn({TEMPLATE_SERVICE_NAME}ServerStartScripts)
 }

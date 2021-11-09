@@ -1,6 +1,6 @@
-rootProject.name = "bar-service-kotlin-server"
+rootProject.name = "{TEMPLATE_SERVICE_HYPHEN_NAME}-service-server"
 
-include("bar-service-models", "bar-service-server")
+include("{TEMPLATE_SERVICE_HYPHEN_NAME}-service-models", "{TEMPLATE_SERVICE_HYPHEN_NAME}-service-server")
 
 pluginManagement {
     repositories {
