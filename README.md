@@ -7,7 +7,7 @@
 This directory contains the server impl in Kotlin for a simple gRPC starter service. 
 You can find detailed instructions for building and running example from below
 
-- **Bar Service** using gRPC and Kotlin. For details, see the [project on github](https://github.com/hwslabs/bar-service-kotlin-server).
+- **Bar Service Server** using gRPC and Kotlin. For details, see the [project on github](https://github.com/hwslabs/bar-service-kotlin-server).
 
 ## File organization
 

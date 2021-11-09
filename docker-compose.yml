@@ -1,6 +1,7 @@
 version: "3"
 services:
-  starter-service:
+  {TEMPLATE_SERVICE_HYPHEN_NAME}-service:
+    image: ${DOCKER_REGISTRY}/bar-service
     build:
       context: .
       dockerfile: ./docker/Dockerfile
