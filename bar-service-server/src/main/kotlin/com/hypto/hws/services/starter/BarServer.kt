@@ -17,16 +17,20 @@
 package com.hypto.hws.services.starter
 
 import com.google.protobuf.Timestamp
+import com.hypto.hws.services.starter.barServiceDynamoDao.BarServiceDao
+import com.hypto.hws.services.starter.barServiceDynamoDao.entities.Order
+import com.hypto.hws.services.starter.interceptors.ExceptionHandler
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import java.time.Instant
-import java.util.*
+import java.util.UUID
 
 
 class BarServer(private val port: Int) {
     private val server: Server = ServerBuilder
             .forPort(port)
             .addService(HyptoBarService())
+            .intercept(ExceptionHandler())
             .build()
 
     fun start() {
@@ -50,8 +54,6 @@ class BarServer(private val port: Int) {
     }
 
     private class HyptoBarService : BarGrpcKt.BarCoroutineImplBase() {
-
-        val processedOrders = mutableMapOf<Bill, PaymentStatus>()
 
         val drinkContainers = mapOf(
             DrinkType.WHISKY to ContainerType.GLASS,
@@ -94,7 +96,8 @@ class BarServer(private val port: Int) {
                 .setOrderTimestamp(currTimestamp)
                 .build()
 
-            processedOrders[currentBill] = PaymentStatus.PENDING
+            BarServiceDao.createOrder(currentBill)
+
             return currentBill
         }
 
@@ -129,28 +132,32 @@ class BarServer(private val port: Int) {
         }
 
         override suspend fun payBill(request: PaymentRequest): PaymentResponse {
-            return when(processedOrders[request.bill]) {
+            val bill: Bill = request.bill
+            val order: Order = BarServiceDao.getOrder(bill.orderId)
+            return when(order.orderStatus) {
                 PaymentStatus.PENDING, PaymentStatus.FAILED -> {
+                    println("pending or failed")
                     if(request.bill.orderAmount > request.paymentAmount) {
-                        processedOrders[request.bill] = PaymentStatus.FAILED
+                        order.orderStatus = PaymentStatus.FAILED
+                        BarServiceDao.save(order)
                         PaymentResponse.newBuilder()
                             .setBalanceAmount(request.paymentAmount)
                             .setStatus(PaymentStatus.FAILED)
-                            .setReason("Bill amount is ${request.bill.orderAmount} but you have only paid ${request.paymentAmount}")
+                            .setReason("Bill[${bill.orderId}] amount is ${request.bill.orderAmount} but you have only paid ${request.paymentAmount}")
                             .build()
                     } else {
-                        processedOrders.remove(request.bill)
+                        println("marking as paid")
+                        order.orderStatus = PaymentStatus.PAID
+                        BarServiceDao.save(order)
                         PaymentResponse.newBuilder()
                             .setBalanceAmount(request.paymentAmount - request.bill.orderAmount)
                             .setStatus(PaymentStatus.PAID)
-                            .setReason("Bill paid successfully!!")
+                            .setReason("Bill[${bill.orderId}] paid successfully!!")
                             .build()
                     }
                 }
                 else -> {
-                    if(processedOrders.contains(request.bill)) {
-                        processedOrders.remove(request.bill)
-                    }
+                    println("elase case [${order.orderStatus}]")
                     PaymentResponse.newBuilder()
                         .setBalanceAmount(request.paymentAmount)
                         .setStatus(PaymentStatus.FAILED)
@@ -164,6 +171,9 @@ class BarServer(private val port: Int) {
 
 fun main() {
     val port = System.getenv("PORT")?.toInt() ?: 50051
+
+    BarServiceDao.initTables()
+
     val server = BarServer(port)
     server.start()
     server.blockUntilShutdown()

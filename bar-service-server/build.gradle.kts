@@ -20,6 +20,14 @@ dependencies {
     api("com.google.protobuf:protobuf-java-util:${rootProject.ext["protobufVersion"]}")
     api("io.grpc:grpc-kotlin-stub:${rootProject.ext["grpcKotlinVersion"]}")
     runtimeOnly("io.grpc:grpc-netty:${rootProject.ext["grpcVersion"]}")
+
+    /*
+        AWS SDK dependencies
+        https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bom
+     */
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.106"))
+    implementation("com.amazonaws:aws-java-sdk-core")
+    implementation("com.amazonaws:aws-java-sdk-dynamodb")
 }
 
 java {
