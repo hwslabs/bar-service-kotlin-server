@@ -1,3 +1,3 @@
 [submodule "bar-service-models"]
 	path = bar-service-models
-	url = https://github.com/hwslabs/bar-service-models.git
+	url = ../bar-service-models.git
